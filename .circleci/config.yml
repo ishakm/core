@@ -16,7 +16,7 @@ jobs:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: installing dependencies
-          command: yarn
+          command: yarn install --frozen-lockfile
       - save_cache:
           name: save yarn package cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -31,4 +31,5 @@ jobs:
             cd core
             yarn
             yarn build
-            gh-pages -m "automated deploy: ${CIRCLE_SHA1}" -d build
+            export SHA1=$CIRCLE_SHA1
+            yarn deploy
