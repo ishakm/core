@@ -9,7 +9,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            <code> core: in-progress {process.env.SECRET}</code>
+            <code> core: in-progress</code>
           </p>
         </header>
       </div>
