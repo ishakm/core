@@ -24,4 +24,10 @@ jobs:
             - ~/.cache/yarn
       - deploy:
           name: deploying build
-          command: ./.circleci/deploy.sh
+          command: |
+            git config --global user.name $GH_NAME
+            git config --global user.email $GH_EMAIL
+            git clone $CIRCLE_REPOSITORY_URL
+            cd core
+            yarn
+            yarn deploy
