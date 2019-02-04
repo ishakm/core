@@ -29,5 +29,6 @@ jobs:
             git config --global user.email $GH_EMAIL
             git clone $CIRCLE_REPOSITORY_URL
             cd core
+            yarn
             yarn build
             gh-pages -m "automated deploy: ${CIRCLE_SHA1}" -d build
