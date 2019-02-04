@@ -1,27 +1,27 @@
 version: 2
-  jobs:
-    build:
-      branches:
-        only:
-          - master
-      docker:
-        - image: circleci/node:8
-      environment:
-        - TARGET_BRANCH: gh-pages
-      steps:
-        - checkout
-        - restore_cache:
-            name: restore yarn package cache
-            keys: 
-              - yarn-packages-{{ checksum "yarn.lock" }}
-        - run:
-            name: installing dependencies
-            command: yarn install --frozen-lockfile
-        - save_cache:
-            name: save yarn package cache
-            key: yarn-packages-{{ checksum "yarn.lock" }}
-            paths:
-              - ~/.cache/yarn
-        - deploy:
-            name: deploying build
-            command: ./.circleci/deploy.sh
+jobs:
+  build:
+    branches:
+      only:
+        - master
+    docker:
+      - image: circleci/node:8
+    environment:
+      - TARGET_BRANCH: gh-pages
+    steps:
+      - checkout
+      - restore_cache:
+          name: restore yarn package cache
+          keys: 
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: installing dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: save yarn package cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - deploy:
+          name: deploying build
+          command: ./.circleci/deploy.sh
