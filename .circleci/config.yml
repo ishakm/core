@@ -4,13 +4,13 @@ jobs:
     branches:
       only:
         - master
-        - develop
       ignore:
         - gh-pages
+        - develop
     docker:
       - image: circleci/node:8
     environment:
-      - SOURCE_BRANCH: develop
+      - SOURCE_BRANCH: master
       - TARGET_BRANCH: gh-pages
     steps:
       - checkout
