@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: circleci/node:8
     environment:
-      - SOURCE_BRANCH: master
+      - SOURCE_BRANCH: develop
       - TARGET_BRANCH: gh-pages
     steps:
       - checkout
