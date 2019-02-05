@@ -4,6 +4,7 @@ jobs:
     branches:
       only:
         - master
+        - develop
     docker:
       - image: circleci/node:8
     environment:
@@ -28,6 +29,7 @@ jobs:
             git config --global user.name $GH_NAME
             git config --global user.email $GH_EMAIL
             git clone $CIRCLE_REPOSITORY_URL
-            cd core
+
+            cd core/
             yarn
             yarn deploy
