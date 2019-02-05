@@ -4,10 +4,12 @@ jobs:
     branches:
       only:
         - master
-        - develop
+      ignore:
+        - gh-pages
     docker:
       - image: circleci/node:8
     environment:
+      - SOURCE_BRANCH: master
       - TARGET_BRANCH: gh-pages
     steps:
       - checkout
@@ -26,10 +28,23 @@ jobs:
       - deploy:
           name: deploying build
           command: |
-            git config --global user.name $GH_NAME
-            git config --global user.email $GH_EMAIL
-            git clone $CIRCLE_REPOSITORY_URL
+            if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
+              git config --global user.name $GH_NAME
+              git config --global user.email $GH_EMAIL
 
-            cd core/
-            yarn
-            yarn deploy
+              git clone $CIRCLE_REPOSITORY_URL out
+
+              cd out
+              git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+              git rm -rf .
+              cd ..
+
+              yarn build
+              cp -a build/. out/.
+              mkdir -p out/.circleci && cp -a .circleci/. out/.circleci/.
+              cd out
+
+              git add -A
+              git commit -m "automated deploy: ${CIRCLE_SHA1}" --allow-empty
+              git push origin $TARGET_BRANCH
+            fi
