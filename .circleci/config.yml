@@ -4,6 +4,7 @@ jobs:
     branches:
       only:
         - master
+        - develop
       ignore:
         - gh-pages
     docker:
