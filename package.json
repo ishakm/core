@@ -13,9 +13,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -m 'automated deploy: $SHA1' -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,6 +28,6 @@
     "gh-pages": "^2.0.1"
   },
   "resolutions": {
-  "terser": "3.14.1"
+    "terser": "3.14.1"
   }
 }
