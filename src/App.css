@@ -8,7 +8,9 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-image: url("https://source.unplash.com/featured/?land");
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
